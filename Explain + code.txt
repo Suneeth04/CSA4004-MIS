@@ -1,0 +1,66 @@
+##EXPLAIN
+
+Now, let's design the form by adding controls:
+
+Add RadioButtons for Gender Selection:
+
+In the Toolbox, find RadioButton.
+Drag two RadioButtons onto the form.
+Change their properties (Text):
+First RadioButton → Text = "Male" → Name = rbMale
+Second RadioButton → Text = "Female" → Name = rbFemale
+Add CheckBoxes for Hobbies Selection:
+
+Drag three CheckBoxes onto the form.
+
+Change their Text and Name:
+First CheckBox → Text = "Reading" → Name = cbReading
+Second CheckBox → Text = "Sports" → Name = cbSports
+Third CheckBox → Text = "Music" → Name = cbMusic
+Add a Button to Submit the Selection:
+
+Drag a Button onto the form.
+
+Change its Text to "Submit" and Name it as btnSubmit.
+Add a Label to Display the Result:
+
+Drag a Label onto the form.
+
+Set its Name to lblResult and leave its Text empty (it will show results after clicking Submit).
+Step 3: Write the Code
+Double-click the "Submit" Button (btnSubmit).
+It will open the code window.
+Copy and paste the following code inside the Form1 class:
+
+### CODE 
+
+Public Class Form1
+    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        Dim gender As String = ""
+
+        ' Check which gender is selected
+        If rbMale.Checked Then
+            gender = "Male"
+        ElseIf rbFemale.Checked Then
+            gender = "Female"
+        Else
+            gender = "Not Selected"
+        End If
+
+        ' Check selected hobbies
+        Dim hobbies As String = ""
+        If cbReading.Checked Then hobbies &= "Reading, "
+        If cbSports.Checked Then hobbies &= "Sports, "
+        If cbMusic.Checked Then hobbies &= "Music, "
+
+        ' Remove the last comma if any hobbies were selected
+        If hobbies.Length > 0 Then
+            hobbies = hobbies.Substring(0, hobbies.Length - 2)
+        Else
+            hobbies = "None"
+        End If
+
+        ' Display the result in the label
+        lblResult.Text = "Gender: " & gender & vbNewLine & "Hobbies: " & hobbies
+    End Sub
+End Class
