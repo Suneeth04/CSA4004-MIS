@@ -1,0 +1,62 @@
+## EXPLAIN
+
+Example: Using Validation Controls in a VB Windows Forms Application
+Let's say we have a simple form where the user has to input their Name, Age, and Email. We'll apply validation to these fields to ensure:
+
+The Name field is not empty.
+The Age field is a number between 18 and 100.
+The Email field matches a valid email format.
+1. Create a Windows Forms Application in VB
+Create a new Windows Forms Application project in Visual Studio or another IDE that supports VB.NET.
+2. Add Controls to the Form
+Add the following controls to the form:
+
+TextBox for Name (txtName).
+TextBox for Age (txtAge).
+TextBox for Email (txtEmail).
+Button to submit the form (btnSubmit).
+Label for displaying validation messages (lblMessage).
+
+## CODE
+
+Public Class Form1
+
+    ' Button Click Event to perform validation when the Submit button is clicked
+    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        ' Clear previous messages
+        lblMessage.Text = ""
+
+        ' Validate Name - Required Field Check
+        If String.IsNullOrWhiteSpace(txtName.Text) Then
+            lblMessage.Text &= "Name is required." & vbCrLf
+        End If
+
+        ' Validate Age - Must be a number between 18 and 100
+        Dim age As Integer
+        If Not Integer.TryParse(txtAge.Text, age) Then
+            lblMessage.Text &= "Age must be a valid number." & vbCrLf
+        ElseIf age < 18 Or age > 100 Then
+            lblMessage.Text &= "Age must be between 18 and 100." & vbCrLf
+        End If
+
+        ' Validate Email - Simple email format check
+        If Not IsValidEmail(txtEmail.Text) Then
+            lblMessage.Text &= "Please enter a valid email address." & vbCrLf
+        End If
+
+        ' If no validation messages were shown, display success message
+        If lblMessage.Text = "" Then
+            lblMessage.Text = "Form submitted successfully!"
+        End If
+    End Sub
+
+    ' Helper function to validate email format using a regular expression
+    Private Function IsValidEmail(email As String) As Boolean
+        Try
+            Dim emailAddress = New System.Net.Mail.MailAddress(email)
+            Return emailAddress.Address = email
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+End Class
