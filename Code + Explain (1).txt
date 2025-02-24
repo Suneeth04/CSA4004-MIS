@@ -1,0 +1,60 @@
+## EXPLAIN
+
+ Design the Form
+Add a ComboBox
+
+Drag and drop a ComboBox from the Toolbox onto the form.
+Rename it to cmbColors (from the Properties window).
+Add a ListBox
+
+Drag and drop a ListBox onto the form.
+Rename it to lstColors.
+Add Two Buttons
+
+Drag two Button controls onto the form.
+Rename the first button to btnAdd and set its text to "Add to List".
+Rename the second button to btnRemove and set its text to "Remove Selected".
+
+## CODE
+
+Public Class Form1
+    ' This method runs when the form loads
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Add colors to ComboBox
+        cmbColors.Items.Add("Red")
+        cmbColors.Items.Add("Green")
+        cmbColors.Items.Add("Blue")
+        cmbColors.Items.Add("Yellow")
+        cmbColors.Items.Add("Black")
+        cmbColors.Items.Add("White")
+    End Sub
+
+    ' This method runs when "Add to List" button is clicked
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ' Check if an item is selected in ComboBox
+        If cmbColors.SelectedItem IsNot Nothing Then
+            ' Add selected item to ListBox
+            lstColors.Items.Add(cmbColors.SelectedItem)
+        Else
+            MessageBox.Show("Please select a color from the ComboBox.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
+
+    ' This method runs when "Remove Selected" button is clicked
+    Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
+        ' Check if an item is selected in ListBox
+        If lstColors.SelectedItem IsNot Nothing Then
+            ' Remove selected item from ListBox
+            lstColors.Items.Remove(lstColors.SelectedItem)
+        Else
+            MessageBox.Show("Please select an item to remove from the ListBox.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
+End Class
+
+
+            Case Else
+                MessageBox.Show("Unknown action.")
+        End Select
+    End Sub
+End Class
